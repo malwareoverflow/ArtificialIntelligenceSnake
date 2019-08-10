@@ -50,11 +50,15 @@ for(int i=0;i<moves.Length;i++)
 {
   int[,] move = moves[i];
   
- 
+ int length = move.GetLength(0)-1;
+ for(int row=0;row<=length;row++)
+ {
   for(int c = 0;c<move.Length;c++){
 
-Console.Write($"{move[0,c]} ");
+Console.Write($"{move[row,c]} ");
   }
+ }
+
   
 
 Console.WriteLine();
