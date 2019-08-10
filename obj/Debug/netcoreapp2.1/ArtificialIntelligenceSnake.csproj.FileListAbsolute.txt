@@ -1,0 +1,11 @@
+/root/dotnetCore-Project/ArtificialIntelligenceSnake/bin/Debug/netcoreapp2.1/ArtificialIntelligenceSnake.deps.json
+/root/dotnetCore-Project/ArtificialIntelligenceSnake/bin/Debug/netcoreapp2.1/ArtificialIntelligenceSnake.runtimeconfig.json
+/root/dotnetCore-Project/ArtificialIntelligenceSnake/bin/Debug/netcoreapp2.1/ArtificialIntelligenceSnake.runtimeconfig.dev.json
+/root/dotnetCore-Project/ArtificialIntelligenceSnake/bin/Debug/netcoreapp2.1/ArtificialIntelligenceSnake.dll
+/root/dotnetCore-Project/ArtificialIntelligenceSnake/bin/Debug/netcoreapp2.1/ArtificialIntelligenceSnake.pdb
+/root/dotnetCore-Project/ArtificialIntelligenceSnake/obj/Debug/netcoreapp2.1/ArtificialIntelligenceSnake.csprojAssemblyReference.cache
+/root/dotnetCore-Project/ArtificialIntelligenceSnake/obj/Debug/netcoreapp2.1/ArtificialIntelligenceSnake.csproj.CoreCompileInputs.cache
+/root/dotnetCore-Project/ArtificialIntelligenceSnake/obj/Debug/netcoreapp2.1/ArtificialIntelligenceSnake.AssemblyInfoInputs.cache
+/root/dotnetCore-Project/ArtificialIntelligenceSnake/obj/Debug/netcoreapp2.1/ArtificialIntelligenceSnake.AssemblyInfo.cs
+/root/dotnetCore-Project/ArtificialIntelligenceSnake/obj/Debug/netcoreapp2.1/ArtificialIntelligenceSnake.dll
+/root/dotnetCore-Project/ArtificialIntelligenceSnake/obj/Debug/netcoreapp2.1/ArtificialIntelligenceSnake.pdb
