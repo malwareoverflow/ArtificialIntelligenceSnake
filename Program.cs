@@ -48,6 +48,8 @@ public class SnakeXenzia
   int _actualColSnake =0;
     int _actualRowBoard =0;
   int _actualColBoard =0;
+
+  int _totalMoves =0;
   int _minmum=0;
    public SnakeXenzia(int[,] dimention,int[,] target,int[,] snakePosition){
 
@@ -68,9 +70,10 @@ Console.WriteLine($"{x.PosX},{x.PosY}");
 
 }
 
-    List<Point>   getPossibleMoves(int position,int accRowSnake,int accColSnake,int accRowBoard,int accColBoard ){
+    List<Point>   getPossibleMoves(int position,int accRowSnake,int accColSnake ){
  
     List<Point> points = new List<Point>();
+  
 switch(position)
      {
 
@@ -80,7 +83,7 @@ switch(position)
  points = new List<Point>
     {
         new Point(accRowSnake-1, accColSnake),
-        new Point(accRowSnake,accColBoard+1),
+        new Point(accRowSnake,accColSnake+1),
     };
 
 
@@ -95,7 +98,8 @@ switch(position)
     points = new List<Point>
     {
         new Point(accRowSnake+1,accColSnake),
-        new Point(accRowSnake,accRowSnake+1),
+        new Point(accRowSnake,accColSnake+1)
+
     };
 
 
@@ -110,8 +114,8 @@ switch(position)
    
   points = new List<Point>
     {
-        new Point(accRowSnake+1,accColSnake),
-        new Point(accRowSnake,accColSnake-1),
+        new Point(_snakePosition.GetLength(0)+1,_snakePosition.GetLength(1)),
+        new Point(_snakePosition.GetLength(0),_snakePosition.GetLength(1)-1),
     };
 
  
@@ -125,8 +129,8 @@ switch(position)
 
      points = new List<Point>
     {
-        new Point(accRowSnake-1,accColSnake),
-        new Point(accRowSnake,accColSnake-1),
+        new Point(_snakePosition.GetLength(0)-1,_snakePosition.GetLength(1)),
+        new Point(_snakePosition.GetLength(0),_snakePosition.GetLength(1)-1),
     };
 
 
@@ -143,9 +147,9 @@ switch(position)
 
    points = new List<Point>
     {
-        new Point(accRowSnake-1,accColSnake),
-        new Point(accRowSnake,accColSnake-1),
-            new Point(accRowSnake,accColSnake+1)
+        new Point(_snakePosition.GetLength(0)-1,_snakePosition.GetLength(1)),
+        new Point(_snakePosition.GetLength(0),_snakePosition.GetLength(1)-1),
+            new Point(_snakePosition.GetLength(0),_snakePosition.GetLength(1)+1)
     };
         
 
@@ -162,9 +166,9 @@ switch(position)
 
   points = new List<Point>
     {
-        new Point(accRowSnake+1,accColSnake),
-        new Point(accRowSnake,accColSnake-1),
-            new Point(accRowSnake,accColSnake+1)
+        new Point(_snakePosition.GetLength(0)+1,_snakePosition.GetLength(1)),
+        new Point(_snakePosition.GetLength(0),_snakePosition.GetLength(1)-1),
+            new Point(_snakePosition.GetLength(0),_snakePosition.GetLength(1)+1)
     };
            
 
@@ -181,10 +185,10 @@ switch(position)
    
      points = new List<Point>
     {
-        new Point(accRowSnake+1,accColSnake),
-        new Point(accRowSnake-1,accColSnake),
-            new Point(accRowSnake,accColBoard-1),
-              new Point(accRowSnake,accColSnake+1)
+        new Point(_snakePosition.GetLength(0)+1,_snakePosition.GetLength(1)),
+        new Point(_snakePosition.GetLength(0)-1,_snakePosition.GetLength(1)),
+            new Point(_snakePosition.GetLength(0),_snakePosition.GetLength(1)-1),
+              new Point(_snakePosition.GetLength(0),_snakePosition.GetLength(1)+1)
     };
 
   
@@ -198,12 +202,13 @@ switch(position)
 
        case (short) snakePositionType.ATCORNERL:
    
+
       points = new List<Point>
     {
-        new Point(accRowSnake+1,accColSnake),
-        new Point(accRowSnake-1,accColSnake),
-            new Point(accRowSnake,accColSnake+1)
-              
+     
+                 new Point(_snakePosition.GetLength(0)+1,_snakePosition.GetLength(1)),
+        new Point(_snakePosition.GetLength(0)-1,_snakePosition.GetLength(1)),
+            new Point(_snakePosition.GetLength(0),_snakePosition.GetLength(1)+1)
     };
 
 
@@ -219,9 +224,9 @@ switch(position)
 
   points = new List<Point>
     {
-        new Point(accRowSnake+1,accColSnake),
-        new Point(accRowSnake-1,accColSnake),
-            new Point(accRowSnake,accColSnake-1)
+        new Point(_snakePosition.GetLength(0)+1,_snakePosition.GetLength(1)),
+        new Point(_snakePosition.GetLength(0)-1,_snakePosition.GetLength(1)),
+            new Point(_snakePosition.GetLength(0),_snakePosition.GetLength(1)-1)
               
     };
  
@@ -239,7 +244,7 @@ switch(position)
 
 
 
- getNearFromTarget(points);
+  
 
 
 return points;
@@ -265,10 +270,10 @@ int[,] getRandomPositionOnBoard(){
 
 short getSnakePositionType(){
 
-   _actualRowSnake = _snakePosition.GetLength(0)-1;
-   _actualColSnake = _snakePosition.GetLength(1)-1;
-     _actualRowBoard = _boardDimention.GetLength(0)-1;
-   _actualColBoard = _boardDimention.GetLength(1)-1;
+   _actualRowSnake = _snakePosition.GetLength(0)>=0?_snakePosition.GetLength(0)-1:_snakePosition.GetLength(0) ;
+   _actualColSnake = _snakePosition.GetLength(1)>=0?_snakePosition.GetLength(1)-1:_snakePosition.GetLength(1);
+     _actualRowBoard = _boardDimention.GetLength(0)>=0?_boardDimention.GetLength(0)-1:_boardDimention.GetLength(0);
+   _actualColBoard = _boardDimention.GetLength(1)>=0?_boardDimention.GetLength(1)-1:_boardDimention.GetLength(1);
   _minmum=0;
  short currentPos=(short)snakePositionType.INVALID;
 
@@ -349,9 +354,9 @@ int a = (_actualRowSnake-1),b = _minmum,c = _actualColSnake+1;
 
  Point getNearFromTarget( List<Point> possiblePosition){
  Point closestPoint=null; 
- if(isSuccess(_snakePosition))
+ if(isSuccess())
 {
-Console.WriteLine("Already capture");
+Console.WriteLine("Snake has been captured");
 
 }
 else{
@@ -362,6 +367,8 @@ else{
    )).FirstOrDefault();
 
   Console.WriteLine($"The closest point to {_targetPosition.GetLength(0)},{_targetPosition.GetLength(1)} is {closestPoint.PosX},{closestPoint.PosY}");
+Console.WriteLine($"Moving snake to {closestPoint.PosX},{closestPoint.PosY}");
+
 
   }
 }
@@ -377,7 +384,20 @@ return closestPoint;
 
 
 
+void moveSnake(Point point)
+{
+  if(point!=null)
+  {
+_snakePosition = new int[point.PosX,point.PosY];
+Console.WriteLine($"Snake moved to {point.PosX},{point.PosY}");
+_totalMoves++;
+  }
 
+else
+{
+    Console.WriteLine("No path to move");
+}
+}
 
 bool isValidLoop(){
 
@@ -389,27 +409,33 @@ bool isValidLoop(){
   return true;
 
 }
-bool isSuccess(int[,] snakePos){
-return (  snakePos.GetLength(0)==_targetPosition.GetLength(0)&&snakePos.GetLength(1)==_targetPosition.GetLength(1));
+bool isSuccess(){
+return (  _snakePosition.GetLength(0)==_targetPosition.GetLength(0)&&_snakePosition.GetLength(1)==_targetPosition.GetLength(1));
 }
 public void runGame(){
-if(isSuccess(_snakePosition))
+ 
+if(isSuccess())
 {
-Console.WriteLine("Already capture");
+Console.WriteLine("Snake has been captured");
+Console.WriteLine($"Total moves = {_totalMoves}");
 return;
 }
+
+
   else{
+     List<Point> point=null;
      if(isIndexExists(_targetPosition,_boardDimention)&&isValidLoop())
 {
 
 
 short _type = getSnakePositionType();
+
 switch(_type){
 
     case (short) snakePositionType.ATCORNERDOWNL:
   Console.WriteLine("Snake is to the corner Down L");
 
- getPossibleMoves(((int)snakePositionType.ATCORNERDOWNL),_actualRowSnake,_actualColSnake,_actualRowBoard,_actualColBoard);
+ point=getPossibleMoves(((int)snakePositionType.ATCORNERDOWNL),_snakePosition.GetLength(0),_snakePosition.GetLength(1));
 
     break;
 
@@ -417,7 +443,7 @@ switch(_type){
    
 Console.WriteLine("Snake is to the corner Up L");
    
-    getPossibleMoves(((int)snakePositionType.ATCORNERUPL),_actualRowSnake,_actualColSnake,_actualRowBoard,_actualColBoard);
+   point= getPossibleMoves(((int)snakePositionType.ATCORNERUPL),_snakePosition.GetLength(0),_snakePosition.GetLength(1));
 
     break;
 
@@ -426,7 +452,7 @@ Console.WriteLine("Snake is to the corner Up L");
   case (short) snakePositionType.ATCORNERUPR:
    
 Console.WriteLine("Snake is to the corner Up R");
-   getPossibleMoves(((int)snakePositionType.ATCORNERUPR),_actualRowSnake,_actualColSnake,_actualRowBoard,_actualColBoard);
+  point= getPossibleMoves(((int)snakePositionType.ATCORNERUPR),_snakePosition.GetLength(0),_snakePosition.GetLength(1));
 
     
     break;
@@ -435,7 +461,7 @@ Console.WriteLine("Snake is to the corner Up R");
    
 Console.WriteLine("Snake is to the corner Down R");
    
-    getPossibleMoves(((int)snakePositionType.ATCORNERDOWNR),_actualRowSnake,_actualColSnake,_actualRowBoard,_actualColBoard);
+  point=  getPossibleMoves(((int)snakePositionType.ATCORNERDOWNR),_snakePosition.GetLength(0),_snakePosition.GetLength(1));
 
     break;
 
@@ -444,7 +470,7 @@ Console.WriteLine("Snake is to the corner Down R");
    
 Console.WriteLine("Snake is T Shape Down");
    
-    getPossibleMoves(((int)snakePositionType.TSHAPEDOWN),_actualRowSnake,_actualColSnake,_actualRowBoard,_actualColBoard);
+ point=   getPossibleMoves(((int)snakePositionType.TSHAPEDOWN),_snakePosition.GetLength(0),_snakePosition.GetLength(1));
 
     break;
 
@@ -452,7 +478,7 @@ Console.WriteLine("Snake is T Shape Down");
       case (short) snakePositionType.TSHAPEUP:
    
 Console.WriteLine("Snake is T Shape UP");
-   getPossibleMoves(((int)snakePositionType.TSHAPEUP),_actualRowSnake,_actualColSnake,_actualRowBoard,_actualColBoard);
+ point=  getPossibleMoves(((int)snakePositionType.TSHAPEUP),_snakePosition.GetLength(0),_snakePosition.GetLength(1));
 
     
     break;
@@ -460,7 +486,7 @@ Console.WriteLine("Snake is T Shape UP");
      case (short) snakePositionType.ALLFREEUP:
    
 Console.WriteLine("Snake is ALL FREE UP");
-   getPossibleMoves(((int)snakePositionType.ALLFREEUP),_actualRowSnake,_actualColSnake,_actualRowBoard,_actualColBoard);
+point=   getPossibleMoves(((int)snakePositionType.ALLFREEUP),_snakePosition.GetLength(0),_snakePosition.GetLength(1));
 
     
     break;
@@ -470,14 +496,14 @@ Console.WriteLine("Snake is ALL FREE UP");
    
 Console.WriteLine("Snake is ALL FREE DOWN");
    
-    getPossibleMoves(((int)snakePositionType.ALLFREEDOWN),_actualRowSnake,_actualColSnake,_actualRowBoard,_actualColBoard);
+ point=   getPossibleMoves(((int)snakePositionType.ALLFREEDOWN),_snakePosition.GetLength(0),_snakePosition.GetLength(1));
 
     break;
 
        case (short) snakePositionType.ATCORNERL:
    
 Console.WriteLine("Snake is AT CORNER LEFT");
-   getPossibleMoves(((int)snakePositionType.ATCORNERL),_actualRowSnake,_actualColSnake,_actualRowBoard,_actualColBoard);
+point=   getPossibleMoves(((int)snakePositionType.ATCORNERL),_snakePosition.GetLength(0),_snakePosition.GetLength(1));
 
     
     break;
@@ -485,7 +511,7 @@ Console.WriteLine("Snake is AT CORNER LEFT");
         case (short) snakePositionType.ATCORNERR:
    
 Console.WriteLine("Snake is AT CORNER RIGHT");
-   getPossibleMoves(((int)snakePositionType.ATCORNERR),_actualRowSnake,_actualColSnake,_actualRowBoard,_actualColBoard);
+point=   getPossibleMoves(((int)snakePositionType.ATCORNERR),_snakePosition.GetLength(0),_snakePosition.GetLength(1));
 
     
     break;
@@ -495,10 +521,12 @@ break;
    
 
 }
+
+moveSnake(getNearFromTarget(point));
 }
   }
    
-
+runGame();
 }
 
 
@@ -512,14 +540,45 @@ break;
         static void Main(string[] args)
         {
 
-        for(int row=1;row<=4;row++){
 
-for(int col=1;col<=4;col++)
-{
-  SnakeXenzia game = new SnakeXenzia(new int[4,4],new int[2,2],new int[row,col]);
+Console.WriteLine("Welcome to xenzia!");
+
+
+  Random random  = new Random();
+ int boardRow = 1, boardCol =1,targetRow=1,targetCol=1,snakePosX=1,snakePosY=1;
+
+
+
+Console.WriteLine("Enter board rows:");
+boardRow = int.Parse(Console.ReadLine());
+
+Console.WriteLine("Enter board columns:");
+boardCol = int.Parse(Console.ReadLine());
+
+
+
+Console.WriteLine("Enter target row:");
+targetRow = int.Parse(Console.ReadLine());
+
+
+
+Console.WriteLine("Enter target column:");
+targetCol = int.Parse(Console.ReadLine());
+
+
+Console.WriteLine("Enter snake row:");
+snakePosX = int.Parse(Console.ReadLine());
+
+
+Console.WriteLine("Enter snake column:");
+snakePosY = int.Parse(Console.ReadLine());
+
+
+
+  SnakeXenzia game = new SnakeXenzia(new int[boardRow,boardCol],new int[targetRow,targetCol],new int[ snakePosX, snakePosY]);
 game.runGame();
-}
-        }
+
+        
     
         }
     }
