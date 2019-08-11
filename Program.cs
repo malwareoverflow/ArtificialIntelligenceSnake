@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace ArtificialIntelligenceSnake
 {
@@ -19,7 +21,22 @@ namespace ArtificialIntelligenceSnake
       INVALID = 10
 
     }
- 
+ public class Point
+{
+    public Point(int posX, int posY)
+    {
+        PosX = posX;
+        PosY = posY;
+    }
+
+    public int PosX { get; set; }
+    public int PosY { get; set; }
+
+    public double DistanceFromPoint(Point otherPoint)
+    {
+        return Math.Sqrt(Math.Pow((otherPoint.PosX - PosX), 2) + Math.Pow((otherPoint.PosY - PosY), 2));
+    }
+}
 public class SnakeXenzia
 {
   
@@ -43,63 +60,47 @@ this._snakePosition = snakePosition;
 
 
 
-void printPossibleMoves(int[][,]  moves,int type){
-  Console.WriteLine($"Possible moves for {Enum.GetName(typeof(snakePositionType), type)} length {moves.Length} are");
+void printPossibleMoves(List<Point>  moves,int type){
+  Console.WriteLine($"Possible moves for {Enum.GetName(typeof(snakePositionType), type)} length {moves.Count} are");
 
-for(int i=0;i<moves.Length;i++)
-{
-  int[,] move = moves[i];
-  
- int length = move.GetLength(0)-1;
- for(int row=0;row<=length;row++)
- {
-  for(int c = 0;c<move.Length;c++){
-
-Console.Write($"{move[row,c]} ");
-  }
- }
-
-  
-
-Console.WriteLine();
-
+foreach(Point x  in moves)
+Console.WriteLine($"{x.PosX},{x.PosY}");
 
 }
 
-}
-
-    int[][,]   getPossibleMoves(int position,int accRowSnake,int accColSnake,int accRowBoard,int accColBoard ){
-    int [][,] positions=null;
+    List<Point>   getPossibleMoves(int position,int accRowSnake,int accColSnake,int accRowBoard,int accColBoard ){
+ 
+    List<Point> points = new List<Point>();
 switch(position)
      {
 
     case (short) snakePositionType.ATCORNERDOWNL:
 
-positions = new int[2][,] 
-{
-    new int[,] { {accRowSnake-1,accColSnake} },
-    new int[,]{ {accRowSnake,accColBoard+1}}
+
+ points = new List<Point>
+    {
+        new Point(accRowSnake-1, accColSnake),
+        new Point(accRowSnake,accColBoard+1),
+    };
+
+
+  printPossibleMoves(points,(int)snakePositionType.ATCORNERDOWNL);
+
  
-};
-
-
-  printPossibleMoves(positions,(int)snakePositionType.ATCORNERDOWNL);
-
-
-  
     break;
 
      case (short) snakePositionType.ATCORNERUPL:
    
-positions = new int[2][,] 
-{
-    new int[,] { {accRowSnake+1,accColSnake} },
-    new int[,]{{accRowSnake,accRowSnake+1}}
- 
-};
+
+    points = new List<Point>
+    {
+        new Point(accRowSnake+1,accColSnake),
+        new Point(accRowSnake,accRowSnake+1),
+    };
 
 
- printPossibleMoves(positions,(int)snakePositionType.ATCORNERUPL);
+
+ printPossibleMoves(points,(int)snakePositionType.ATCORNERUPL);
     
     break;
 
@@ -107,30 +108,30 @@ positions = new int[2][,]
 
   case (short) snakePositionType.ATCORNERUPR:
    
+  points = new List<Point>
+    {
+        new Point(accRowSnake+1,accColSnake),
+        new Point(accRowSnake,accColSnake-1),
+    };
 
-   positions = new int[2][,] 
-{
-    new int[,] { {accRowSnake+1,accColSnake} },
-    new int[,]{{accRowSnake,accColSnake-1}}
- 
-};
  
 
-    printPossibleMoves(positions,(int)snakePositionType.ATCORNERUPR);
+    printPossibleMoves(points,(int)snakePositionType.ATCORNERUPR);
     
     break;
 
  case (short) snakePositionType.ATCORNERDOWNR:
    
-      positions = new int[2][,] 
-{
-    new int[,] { {accRowSnake-1,accColSnake}},
-    new int[,]{{accRowSnake,accColSnake-1} }
- 
-};
+
+     points = new List<Point>
+    {
+        new Point(accRowSnake-1,accColSnake),
+        new Point(accRowSnake,accColSnake-1),
+    };
 
 
-    printPossibleMoves(positions,(int)snakePositionType.ATCORNERDOWNR);
+
+    printPossibleMoves(points,(int)snakePositionType.ATCORNERDOWNR);
     
    
     
@@ -140,16 +141,16 @@ positions = new int[2][,]
       case (short) snakePositionType.TSHAPEDOWN:
    
 
-         positions = new int[3][,] 
-{
-    new int[,] { {accRowSnake-1,accColSnake} },
-    new int[,]{{accRowSnake,accColSnake-1}},
-    new int[,]{{accRowSnake,accColSnake+1}}
+   points = new List<Point>
+    {
+        new Point(accRowSnake-1,accColSnake),
+        new Point(accRowSnake,accColSnake-1),
+            new Point(accRowSnake,accColSnake+1)
+    };
+        
 
- 
-};
 
-      printPossibleMoves(positions,(int)snakePositionType.TSHAPEDOWN);
+      printPossibleMoves(points,(int)snakePositionType.TSHAPEDOWN);
      
     
     break;
@@ -158,14 +159,17 @@ positions = new int[2][,]
       case (short) snakePositionType.TSHAPEUP:
    
 
-            positions = new int[3][,] 
-{
-    new int[,] { {accRowSnake+1,accColSnake} },
- new int[,]{{accRowSnake,accColSnake-1}},
- new int[,]{{accRowSnake,accColSnake+1}}
-};
 
-      printPossibleMoves(positions,(int)snakePositionType.TSHAPEUP);
+  points = new List<Point>
+    {
+        new Point(accRowSnake+1,accColSnake),
+        new Point(accRowSnake,accColSnake-1),
+            new Point(accRowSnake,accColSnake+1)
+    };
+           
+
+
+      printPossibleMoves(points,(int)snakePositionType.TSHAPEUP);
      
     
     break;
@@ -174,17 +178,17 @@ positions = new int[2][,]
      
       case (short) snakePositionType.ALLFREEDOWN:
    
+   
+     points = new List<Point>
+    {
+        new Point(accRowSnake+1,accColSnake),
+        new Point(accRowSnake-1,accColSnake),
+            new Point(accRowSnake,accColBoard-1),
+              new Point(accRowSnake,accColSnake+1)
+    };
 
-               positions = new int[4][,] 
-{
-    new int[,] { {accRowSnake+1,accColSnake}},
- new int[,]{{accRowSnake-1,accColSnake}},
- new int[,]{{accRowSnake,accColBoard-1}},
- new int[,]{{accRowSnake,accColSnake+1} }
-
-};
   
-       printPossibleMoves(positions,(int)snakePositionType.ALLFREEDOWN);
+       printPossibleMoves(points,(int)snakePositionType.ALLFREEDOWN);
      
      
     
@@ -194,31 +198,36 @@ positions = new int[2][,]
 
        case (short) snakePositionType.ATCORNERL:
    
+      points = new List<Point>
+    {
+        new Point(accRowSnake+1,accColSnake),
+        new Point(accRowSnake-1,accColSnake),
+            new Point(accRowSnake,accColSnake+1)
+              
+    };
 
-                  positions = new int[3][,] 
-{
-    new int[,] {  {accRowSnake+1,accColSnake} },
- new int[,]{{accRowSnake-1,accColSnake}},
- new int[,]{{accRowSnake,accColSnake+1}}
-};
+
 
    
-       printPossibleMoves(positions,(int)snakePositionType.ATCORNERL);
+       printPossibleMoves(points,(int)snakePositionType.ATCORNERL);
      
     
     break;
 
         case (short) snakePositionType.ATCORNERR:
 
-                  positions = new int[3][,] 
-{
-    new int[,] { {accRowSnake+1,accColSnake}},
- new int[,]{{accRowSnake-1,accColSnake}},
- new int[,]{{accRowSnake,accColSnake-1}}
-};
+
+  points = new List<Point>
+    {
+        new Point(accRowSnake+1,accColSnake),
+        new Point(accRowSnake-1,accColSnake),
+            new Point(accRowSnake,accColSnake-1)
+              
+    };
+ 
 
 
-      printPossibleMoves(positions,(int)snakePositionType.ATCORNERR);
+      printPossibleMoves(points,(int)snakePositionType.ATCORNERR);
      
     
     
@@ -228,7 +237,12 @@ positions = new int[2][,]
 
 }
 
-return positions;
+
+
+ getNearFromTarget(points);
+
+
+return points;
     }
 
 
@@ -333,24 +347,29 @@ int a = (_actualRowSnake-1),b = _minmum,c = _actualColSnake+1;
 }
 
 
- int[,] getNearFromTarget( int[][,] possiblePosition){
-
-  if(possiblePosition.Length==0){
-    return  possiblePosition[0];
-  }
-  else{
-    int[,] _tempNearest = possiblePosition[0];
-     for (int i = 0; i < possiblePosition.Length; i++)
-        {
-            int[,] innerArray = possiblePosition[i];
-            if(innerArray.GetLength(0)<=_tempNearest.GetLength(0) &&innerArray.GetLength(1)<=_tempNearest.GetLength(1)){
-_tempNearest = innerArray;
-            }
-          
-        }
- return _tempNearest;
+ Point getNearFromTarget( List<Point> possiblePosition){
+ Point closestPoint=null; 
+ if(isSuccess(_snakePosition))
+{
+Console.WriteLine("Already capture");
 
 }
+else{
+ if(possiblePosition.Count>0){
+  
+   closestPoint = possiblePosition.OrderBy(point => 
+   point.DistanceFromPoint(new Point(_targetPosition.GetLength(0),_targetPosition.GetLength(1))
+   )).FirstOrDefault();
+
+  Console.WriteLine($"The closest point to {_targetPosition.GetLength(0)},{_targetPosition.GetLength(1)} is {closestPoint.PosX},{closestPoint.PosY}");
+
+  }
+}
+
+ 
+return closestPoint;
+
+
   }
 
 
@@ -370,17 +389,27 @@ bool isValidLoop(){
   return true;
 
 }
+bool isSuccess(int[,] snakePos){
+return (  snakePos.GetLength(0)==_targetPosition.GetLength(0)&&snakePos.GetLength(1)==_targetPosition.GetLength(1));
+}
 public void runGame(){
-    if(isIndexExists(_targetPosition,_boardDimention)&&isValidLoop())
+if(isSuccess(_snakePosition))
 {
-//_snakePosition= getRandomSnakePosition();
+Console.WriteLine("Already capture");
+return;
+}
+  else{
+     if(isIndexExists(_targetPosition,_boardDimention)&&isValidLoop())
+{
+
+
 short _type = getSnakePositionType();
 switch(_type){
 
     case (short) snakePositionType.ATCORNERDOWNL:
   Console.WriteLine("Snake is to the corner Down L");
 
-getPossibleMoves(((int)snakePositionType.ATCORNERDOWNL),_actualRowSnake,_actualColSnake,_actualRowBoard,_actualColBoard);
+ getPossibleMoves(((int)snakePositionType.ATCORNERDOWNL),_actualRowSnake,_actualColSnake,_actualRowBoard,_actualColBoard);
 
     break;
 
@@ -467,6 +496,8 @@ break;
 
 }
 }
+  }
+   
 
 }
 
@@ -485,7 +516,7 @@ break;
 
 for(int col=1;col<=4;col++)
 {
-  SnakeXenzia game = new SnakeXenzia(new int[4,4],new int[0,0],new int[row,col]);
+  SnakeXenzia game = new SnakeXenzia(new int[4,4],new int[2,2],new int[row,col]);
 game.runGame();
 }
         }
