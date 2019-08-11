@@ -41,7 +41,7 @@
           "dependencies": {
             "Microsoft.NETCore.App": {
               "target": "Package",
-              "version": "[2.1.0, )",
+              "version": "[2.1.11, )",
               "autoReferenced": true
             }
           },
@@ -50,6 +50,11 @@
           ],
           "assetTargetFallback": true,
           "warn": true
+        }
+      },
+      "runtimes": {
+        "win10-x64": {
+          "#import": []
         }
       }
     }

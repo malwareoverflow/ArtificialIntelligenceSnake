@@ -1,0 +1,14 @@
+/root/dotnetCore-Project/ArtificialIntelligenceSnake/bin/Release/netcoreapp2.1/win10-x64/hostpolicy.dll
+/root/dotnetCore-Project/ArtificialIntelligenceSnake/bin/Release/netcoreapp2.1/win10-x64/hostfxr.dll
+/root/dotnetCore-Project/ArtificialIntelligenceSnake/bin/Release/netcoreapp2.1/win10-x64/ArtificialIntelligenceSnake.exe
+/root/dotnetCore-Project/ArtificialIntelligenceSnake/bin/Release/netcoreapp2.1/win10-x64/ArtificialIntelligenceSnake.deps.json
+/root/dotnetCore-Project/ArtificialIntelligenceSnake/bin/Release/netcoreapp2.1/win10-x64/ArtificialIntelligenceSnake.runtimeconfig.json
+/root/dotnetCore-Project/ArtificialIntelligenceSnake/bin/Release/netcoreapp2.1/win10-x64/ArtificialIntelligenceSnake.runtimeconfig.dev.json
+/root/dotnetCore-Project/ArtificialIntelligenceSnake/bin/Release/netcoreapp2.1/win10-x64/ArtificialIntelligenceSnake.dll
+/root/dotnetCore-Project/ArtificialIntelligenceSnake/bin/Release/netcoreapp2.1/win10-x64/ArtificialIntelligenceSnake.pdb
+/root/dotnetCore-Project/ArtificialIntelligenceSnake/obj/Release/netcoreapp2.1/win10-x64/ArtificialIntelligenceSnake.csprojAssemblyReference.cache
+/root/dotnetCore-Project/ArtificialIntelligenceSnake/obj/Release/netcoreapp2.1/win10-x64/ArtificialIntelligenceSnake.csproj.CoreCompileInputs.cache
+/root/dotnetCore-Project/ArtificialIntelligenceSnake/obj/Release/netcoreapp2.1/win10-x64/ArtificialIntelligenceSnake.AssemblyInfoInputs.cache
+/root/dotnetCore-Project/ArtificialIntelligenceSnake/obj/Release/netcoreapp2.1/win10-x64/ArtificialIntelligenceSnake.AssemblyInfo.cs
+/root/dotnetCore-Project/ArtificialIntelligenceSnake/obj/Release/netcoreapp2.1/win10-x64/ArtificialIntelligenceSnake.dll
+/root/dotnetCore-Project/ArtificialIntelligenceSnake/obj/Release/netcoreapp2.1/win10-x64/ArtificialIntelligenceSnake.pdb

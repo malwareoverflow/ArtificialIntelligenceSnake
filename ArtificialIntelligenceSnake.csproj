@@ -5,4 +5,9 @@
     <TargetFramework>netcoreapp2.1</TargetFramework>
   </PropertyGroup>
 
+<PropertyGroup>
+<RuntimeIdentifiers>
+win10-x64;
+</RuntimeIdentifiers>
+</PropertyGroup>
 </Project>
